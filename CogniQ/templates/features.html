@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='features_style.css') }}">
+    <title>Features | YogaGuru</title>
+</head>
+
+<body>
+    <div class="top">
+        <h1>Features!</h1>
+        <div class="home"><a href="{{url_for('index')}}">Home</a></div>
+    </div>
+    <div class="hero">
+        <a href="{{url_for('prompt')}}">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <B style="margin-left: 1.2rem;">HealthPredict</B>
+            <br></br>
+            <p>Based on your health condition, We will suggest a set of yoga's to help improve your well-being and relieve discomfort</p>
+
+            <img src="{{ url_for('static', filename='assets/first.png') }}" alt="voice input">
+
+        </a>
+        <a href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <B style="margin-left: 1.2rem;">YOUR MATERIALS</B>
+            <br></br>
+            <p>Enhance your practice with real-time posture guidance, helping you achieve proper alignment for maximum benefit and reduced risk of injury.</p>
+            <img src="{{ url_for('static', filename='assets/materials.webp') }}" alt="voice input">
+        </a>
+        <a href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <B style="margin-left: 1.2rem;">YOUR EXPERIENCE </B>
+            <br></br>
+            <p>Help us improve with your valuable Feedback!</p>
+            <img src="{{ url_for('static', filename='assets/feedback.jpeg') }}" alt="voice input">
+
+        </a>
+    </div>
+</body>
+
+</html>

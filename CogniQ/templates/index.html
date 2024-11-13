@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CogniQ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="bgAnimation" id="bgAnimation">
+        <div class="backgroundAmim">
+            
+        </div>
+    </div>
+    <div class="container">
+        <nav>
+            <h1>HealthAlign<span>  AI</span></h1>
+            <ul>
+                <a href="{{ url_for('index') }}"><li>Home</li></a>
+                <a href="{{ url_for('features') }}"><li>Services</li></a>
+                <a href="{{ url_for('requirements') }}"><li>Requisites</li></a>
+                <a href="{{ url_for('ourTeam') }}"><li>Our Team</li></a>
+                <a href="{{ url_for('contact') }}"><li>Contact</li></a>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}"><li>Logout</li></a>
+        {% endif %}
+            </ul>
+        </nav>
+        <section>
+            <div class="textBox">
+                <h1>Welcome to <span>HealthAlign AI</span></h1>
+                <p>Unlock the secrets to perfect posture and discover personalized solutions for your health concerns with YogaGuru. </p>
+                <a href="{{url_for('login')}}"><button class="homeBtn" style="--i:#fff;">Join Us</button></a>
+                <a href="{{url_for('features')}}"><button class="homeBtn" style="--i:#00bfff;">EXPLORE</button></a>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

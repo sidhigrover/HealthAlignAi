@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthPredict</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='prompt_style.css') }}">
+</head>
+<body>
+    <h1 style="color:white;">HealthPredict</h1>
+    <form id="promptForm" action="/prompt" method="POST">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" required min="4"><br>
+
+        <label for="height_feet">Height (feet):</label>
+        <input type="number" id="height_feet" name="height_feet" required min="0" max="8"><br>
+
+        <label for="height_inches">Height (inches):</label>
+        <input type="number" id="height_inches" name="height_inches" required min="0" max="11"><br>
+
+        <label for="age">Age (years):</label>
+        <input type="number" id="age" name="age" required min="1"><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="Other">Other</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          
+        </select><br>
+
+        <label for="health_issue">Health Issue:</label>
+        <input type="text" id="health_issue" name="health_issue" required><br>
+
+        <button type="submit">SUBMIT</button>
+    </form>
+
+    {% if roast_text %}
+        <div class="result">
+            <h2>Generated Health Recommendation:</h2>
+            <p>{{ roast_text }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
