@@ -96,22 +96,22 @@
                 };
 
 
-                let speechCount = 0;
+               
 
 
 
-        const selectedFeedback = feedbackMessages[selectedPose];
-    if (selectedFeedback && speechCount < 2)  {
-        // Display the full feedback
-        labelContainer.innerHTML = selectedFeedback;
+    //     const selectedFeedback = feedbackMessages[selectedPose];
+    // if (selectedFeedback && speechCount < 2)  {
+    //     // Display the full feedback
+    //     labelContainer.innerHTML = selectedFeedback;
 
-        // Extract only the first line or the exact instructions for speech
-        const firstLine = selectedFeedback.split('.')[0] + '.'; // Get first sentence (instruction)
+    //     // Extract only the first line or the exact instructions for speech
+    //     const firstLine = selectedFeedback.split('.')[0] + '.'; // Get first sentence (instruction)
         
-        // Convert only the instructions to speech
-        speechCount++;
-        speak(firstLine);
-    }
+    //     // Convert only the instructions to speech
+    //     speechCount++;
+    //     speak(firstLine);
+    // }
 
 
                 // Fetch ideal angle data
