@@ -101,7 +101,7 @@
 
         
         const selectedFeedback = feedbackMessages[selectedPose];
-    if (selectedFeedback && speechCount < 2)  {
+    if (selectedFeedback)  {
         // Display the full feedback
         labelContainer.innerHTML = selectedFeedback;
 
@@ -109,7 +109,7 @@
         const firstLine = selectedFeedback.split('.')[0] + '.'; // Get first sentence (instruction)
         
         // Convert only the instructions to speech
-        speechCount++;
+        
         speak(firstLine);
     }
 
