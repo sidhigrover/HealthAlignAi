@@ -12,7 +12,9 @@
         #label-container { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: white; font-size: 24px; text-align: center; z-index: 10; }
         #pose-selection { position: absolute; bottom: 50px; left: 10px; z-index: 10; }
         button { position: absolute; top: 10px; right: 10px; z-index: 10; }
+        
     </style>
+    
 </head>
 <body>
     <div id="yoga-guru">Yoga Guru</div>
@@ -62,17 +64,9 @@
             });
         }
 
-        //let lastFeedbackTime = 0; 
-        //const FEEDBACK_INTERVAL = 2000; 
-
         async function loop(timestamp) {
             webcam.update();
-
-            //if (timestamp - lastFeedbackTime >= FEEDBACK_INTERVAL) {
             await estimatePose();
-            //    lastFeedbackTime = timestamp; // Reset the timer
-            //}
-
             window.requestAnimationFrame(loop);
         }
 
@@ -101,10 +95,24 @@
                     "Vajrasana": "Sit on your heels with a straight back and place hands on your thighs."
                 };
 
-                const selectedFeedback = feedbackMessages[selectedPose];
-                if (selectedFeedback) {
-                    labelContainer.innerHTML = selectedFeedback;
-                }
+
+               
+
+
+        
+        const selectedFeedback = feedbackMessages[selectedPose];
+    if (selectedFeedback && speechCount < 2)  {
+        // Display the full feedback
+        labelContainer.innerHTML = selectedFeedback;
+
+        // Extract only the first line or the exact instructions for speech
+        const firstLine = selectedFeedback.split('.')[0] + '.'; // Get first sentence (instruction)
+        
+        // Convert only the instructions to speech
+        speechCount++;
+        speak(firstLine);
+    }
+
 
                 // Fetch ideal angle data
                 console.log("Selected Pose:", selectedPose);
@@ -128,9 +136,12 @@
                     if (!isNaN(angle) && !isNaN(idealAngle)) {
                         if (Math.abs(angle - idealAngle) <= correctionValue) {
                             labelContainer.innerHTML += `<br>${angle_name_list[i]} angle is good!`;
+                            
                         } else {
                             labelContainer.innerHTML += `<br>${angle_name_list[i]} angle needs adjustment.`;
+                            
                         }
+                        
                     }
                 }
 
@@ -148,6 +159,11 @@
                 });
                 tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
             }
+        }
+
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(utterance);  // Voice feedback
         }
 
 

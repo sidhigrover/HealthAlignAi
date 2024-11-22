@@ -14,5 +14,6 @@ def video_feed():
     return Response(pose_detection.gen_frames(),
                     mimetype='multipart/x-mixed-replace; boundary=frame')  # Stream video frames
 
+
 if __name__ == '__main__':
     app.run(debug=True)
