@@ -57,7 +57,7 @@ def validate_password(password):
 
 
 
-os.environ["GROQ_API_KEY"] = "your_api_key_here"
+os.environ["GROQ_API_KEY"] = "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"
 client = Groq()  # Now, it will automatically pick up the API key from the environment variable
 
 
@@ -162,4 +162,4 @@ def pose():
 
 
 if __name__ == "__main__":
-    app.run(port=5008)
+    app.run(port=5002)
