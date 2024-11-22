@@ -160,6 +160,12 @@ def contact():
 def pose():
     return render_template('pose.html')  # Serve the index.html page
 
+@app.route('/video_feed')
+def video_feed():
+    return Response(pose_detection.gen_frames(),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')  # Stream video frames
+
+
 
 if __name__ == "__main__":
-    app.run(port=5002)
+    app.run(port=5093)
