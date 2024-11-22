@@ -1,89 +1,128 @@
-/* General body and HTML styles */
+/* General Styles */
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #f0f8ff, #e6f7ff);
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
 }
 
+/* Main Container */
 .container {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    text-align: center;
-    width: 90%;
-    max-width: 600px;
-}
-
-/* Select and button styles */
-select {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    gap: 20px; /* Add spacing between video and side panel */
 }
 
+/* Video Section */
+.video-container {
+    flex: 2;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Side Panel */
+.side-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 100%;
+    overflow-y: auto; /* Handle long feedback gracefully */
+}
+
+/* Header */
+#yoga-guru {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+    text-align: left; /* Align to the left */
+    margin-bottom: 20px;
+}
+
+/* Dropdown Menu */
+#pose-selection {
+    font-size: 16px;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #007bff;
+    margin-bottom: 20px;
+    align-self: flex-start; /* Align to the left */
+}
+
+/* Feedback Section */
+#label-container {
+    position: absolute;
+    top: 50%; /* Vertically center the box */
+    left: 75%; /* Move the box leftward to avoid being hidden */
+    transform: translateY(-50%); /* Vertically center it */
+    color: black; /* Dark font color */
+    font-size: 18px; /* Increased font size */
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.7); /* Optional: for better readability */
+    padding: 20px; /* Increased padding for a larger box */
+    border-radius: 10px; /* Optional: rounded corners */
+    width: 250px; /* Set a fixed width for the feedback box */
+    max-width: 100%; /* Ensure it doesn't overflow on smaller screens */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Button */
 button {
-    background-color: #28a745;
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    margin-top: 20px;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #0056b3;
 }
 
-/* Feedback styles */
-#feedback-container {
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #f9f9f9;
-}
-
-h3 {
-    margin: 0 0 10px 0;
-}
-
-/* Video and canvas styles */
-#camera-feed {
-    display: block;
-    width: 100%;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-#overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none; /* Prevents user interaction with the canvas */
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 600px) {
-    button {
-        width: 100%;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
     }
-    
-    select {
-        font-size: 14px;
+
+    .video-container {
+        height: 60%;
+        margin-bottom: 20px;
     }
-    
-    h3 {
-        font-size: 18px;
+
+    .side-panel {
+        height: auto;
     }
 }
