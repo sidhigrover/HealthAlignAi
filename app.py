@@ -74,8 +74,7 @@ def prompt():
         health_issue = request.form['health_issue']
 
         # Create a prompt text for the model
-        prompt_text = f"User Details: Weight = {weight}kg, Height = {height_feet}ft {height_inches}in, Age = {age} years, Gender = {gender}, Health Issue = {health_issue}.  yoga on the basis of  these person these details what would be benefical for person and tell how is person bmi  and yoga for the basis of abobe bmi and dont show how bmi is calculated  and dont use ** in easy way in 4 lines."
-
+        prompt_text = f"You are an expert yoga instructor and wellness advisor. Suggest yoga poses and practices suitable for an individual based on the following details Weight = {weight}kg, Height = {height_feet}ft {height_inches}in, Age = {age} years, Gender = {gender}, Health Issue = {health_issue}. Analyze whether the height and weight are appropriate for the age and provide feedback (e.g., height is less/more, weight is less/more). Suggest up to 3-5 yoga poses suitable for the individual, tailored to their health concerns and fitness goals. Include brief benefits, instructions, and precautions for each suggestion and not extend lines more than 5 and dark the yoga and dark the yoga poses"
         # Interact with Llama model
         chat_completion = client.chat.completions.create(
             messages=[{"role": "user", "content": prompt_text}],
@@ -157,5 +156,10 @@ def requirements():
 def contact():
     return render_template('contact.html')
 
+@app.route('/pose')
+def pose():
+    return render_template('pose.html')  # Serve the index.html page
+
+
 if __name__ == "__main__":
-    app.run(port=5009)
+    app.run(port=5008)
