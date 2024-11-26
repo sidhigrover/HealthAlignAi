@@ -11,7 +11,7 @@
 <body>
     <div class="top">
         <h1>Features!</h1>
-        <div class="home"><a href="{{url_for('index')}}">Home</a></div>
+        <div class="home"><a href="{{url_for('index')}}"></a></div>
     </div>
     <div class="hero">
         <a href="{{url_for('prompt')}}">
@@ -26,27 +26,17 @@
             <img src="{{ url_for('static', filename='assets/first.png') }}" alt="voice input">
 
         </a>
-        <a href="#">
+        <a href="{{url_for('pose')}}">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            <B style="margin-left: 1.2rem;">YOUR MATERIALS</B>
+            <B style="margin-left: 1.2rem;">PoseCorrector</B>
             <br></br>
             <p>Enhance your practice with real-time posture guidance, helping you achieve proper alignment for maximum benefit and reduced risk of injury.</p>
-            <img src="{{ url_for('static', filename='assets/materials.webp') }}" alt="voice input">
+            <img src="{{ url_for('static', filename='assets/yoga1.jpeg') }}" alt="voice input">
         </a>
-        <a href="#">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <B style="margin-left: 1.2rem;">YOUR EXPERIENCE </B>
-            <br></br>
-            <p>Help us improve with your valuable Feedback!</p>
-            <img src="{{ url_for('static', filename='assets/feedback.jpeg') }}" alt="voice input">
-
-        </a>
+       
     </div>
 </body>
 

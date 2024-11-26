@@ -74,7 +74,7 @@ def prompt():
         health_issue = request.form['health_issue']
 
         # Create a prompt text for the model
-        prompt_text = f"You are an expert yoga instructor and wellness advisor. Suggest yoga poses and practices suitable for an individual based on the following details Weight = {weight}kg, Height = {height_feet}ft {height_inches}in, Age = {age} years, Gender = {gender}, Health Issue = {health_issue}. Analyze whether the height and weight are appropriate for the age and provide feedback (e.g., height is less/more, weight is less/more). Suggest up to 3-5 yoga poses suitable for the individual, tailored to their health concerns and fitness goals. Include brief benefits, instructions, and precautions for each suggestion and not extend lines more than 5 and dark the yoga and dark the yoga poses"
+        prompt_text = f"You are an expert yoga instructor and wellness advisor. Suggest yoga poses and practices suitable for an individual based on the following details Weight = {weight}kg, Height = {height_feet}ft {height_inches}in, Age = {age} years, Gender = {gender}, Health Issue = {health_issue}. Analyze whether the height and weight are appropriate for the age and provide feedback (e.g., height is less/more, weight is less/more). Suggest up to 3-5 yoga poses suitable for the individual, tailored to their health concerns and fitness goals. Include brief benefits, instructions, and precautions for each suggestion and not extend lines more than 5 and print each of your suggestions and advices in new line and if possible in points. Ensure each new point comes in new line"
         # Interact with Llama model
         chat_completion = client.chat.completions.create(
             messages=[{"role": "user", "content": prompt_text}],
@@ -148,9 +148,7 @@ def logout():
 def ourTeam():
     return render_template('ourTeam.html')
 
-@app.route('/requirements')
-def requirements():
-    return render_template('requirements.html')
+
 
 @app.route('/contact')
 def contact():
@@ -160,6 +158,12 @@ def contact():
 def pose():
     return render_template('pose.html')  # Serve the index.html page
 
+@app.route('/video_feed')
+def video_feed():
+    return Response(pose_detection.gen_frames(),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')  # Stream video frames
+
+
 
 if __name__ == "__main__":
-    app.run(port=5002)
+    app.run(port=5084)
