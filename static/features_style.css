@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 body {
@@ -174,8 +175,13 @@ p {
     width: 35rem;
 }
 .home a {
-    background-image: url(assets/round.png);
     color: #fff;
     font-weight: bolder;
     text-decoration: none;
+}
+.logo {
+    display: block; /* Makes it a block element */
+    max-width: 100px; /* Set a maximum width for the logo */
+    height: auto; /* Automatically adjusts height to maintain aspect ratio */
+    margin-right: 10px;
 }

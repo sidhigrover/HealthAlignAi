@@ -4,6 +4,10 @@ body {
   margin: 0;
   padding: 20px;
   background-color: #000000;
+  background-image: url('bg.webp'); 
+  background-size: cover;
+  background-repeat: no-repeat; 
+  background-position: center; 
 }
 
 h1 {

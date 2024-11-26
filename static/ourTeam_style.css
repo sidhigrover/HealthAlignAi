@@ -189,9 +189,9 @@ p {
         bottom: 100%;
     }
 }
-.home a{
-    color: #fff;
-    text-decoration: none;
-    font-weight: bolder;
+.logo {
+    display: block;
+    max-width: 100px; 
+    height: auto; 
+    margin-left : 300px;
 }
-
