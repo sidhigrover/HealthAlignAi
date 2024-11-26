@@ -54,18 +54,39 @@ def validate_password(password):
     return None
 
 # Initialize Groq client
-
-
-
 os.environ["GROQ_API_KEY"] = "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"
 client = Groq()  # Now, it will automatically pick up the API key from the environment variable
 
+def format_model_output(response_text):
+    formatted_output = []
+    lines = response_text.split('\n')
+    is_in_list = False
 
-# Route to handle prompt input and Llama response
+    for line in lines:
+        line = line.strip()
+        if line.startswith('- ') or line.startswith('* '):
+            if not is_in_list:
+                formatted_output.append("<ul>")
+                is_in_list = True
+            formatted_output.append(f"<li>{line[2:].strip()}</li>")  # Add the bullet point
+        else:
+            if is_in_list:
+                formatted_output.append("</ul>")
+                is_in_list = False
+            formatted_output.append(line)  # Add plain text as-is
+
+    # Close any unclosed list
+    if is_in_list:
+        formatted_output.append("</ul>")
+
+    return "<br>".join(formatted_output)  # Join everything with line breaks for HTML
+
+# Route to handle input and response
 @app.route('/prompt', methods=['GET', 'POST'])
 @login_required
 def prompt():
     if request.method == 'POST':
+        # Collect user input
         weight = request.form['weight']
         height_feet = request.form['height_feet']
         height_inches = request.form['height_inches']
@@ -73,19 +94,35 @@ def prompt():
         gender = request.form['gender']
         health_issue = request.form['health_issue']
 
-        # Create a prompt text for the model
-        prompt_text = f"You are an expert yoga instructor and wellness advisor. Suggest yoga poses and practices suitable for an individual based on the following details Weight = {weight}kg, Height = {height_feet}ft {height_inches}in, Age = {age} years, Gender = {gender}, Health Issue = {health_issue}. Analyze whether the height and weight are appropriate for the age and provide feedback (e.g., height is less/more, weight is less/more). Suggest up to 3-5 yoga poses suitable for the individual, tailored to their health concerns and fitness goals. Include brief benefits, instructions, and precautions for each suggestion and not extend lines more than 5 and print each of your suggestions and advices in new line and if possible in points. Ensure each new point comes in new line"
-        # Interact with Llama model
+        # Create a prompt for the AI model
+        prompt_text = (
+            f"You are an expert yoga instructor and wellness advisor. Based on the following details:\n"
+            f"- Weight: {weight}kg\n"
+            f"- Height: {height_feet}ft {height_inches}in\n"
+            f"- Age: {age} years\n"
+            f"- Gender: {gender}\n"
+            f"- Health Issue: {health_issue}\n\n"
+            f"Provide a structured response with:\n"
+            f"1. Height and weight analysis.\n"
+            f"2. 3-5 yoga poses, each with benefits, instructions, and precautions.\n"
+            f"Each point must start with '- ' or '* ' and be concise."
+        )
+
+        # Call the AI model for completion
         chat_completion = client.chat.completions.create(
             messages=[{"role": "user", "content": prompt_text}],
             model="llama3-8b-8192",
         )
 
-        # Extract the response from the model
-        roast_text = chat_completion.choices[0].message.content
+        # Get the model's raw response
+        response_text = chat_completion.choices[0].message.content
 
-        return render_template('prompt.html', roast_text=roast_text)
-    
+        # Format response for HTML
+        formatted_text = format_model_output(response_text)
+
+        # Render response in the template
+        return render_template('prompt.html', formatted_text=formatted_text)
+
     return render_template('prompt.html')
 
 # Other routes remain unchanged
