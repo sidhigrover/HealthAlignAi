@@ -168,4 +168,4 @@ def video_feed():
 
 
 if __name__ == "__main__":
-    app.run(port=5093)
+    app.run(port=5094)
