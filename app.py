@@ -55,7 +55,7 @@ def validate_password(password):
 
 # Initialize Groq client
 os.environ["GROQ_API_KEY"] = "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"
-client = Groq()  # Now, it will automatically pick up the API key from the environment variable
+client = Groq()  
 
 def format_model_output(response_text):
     formatted_output = []
@@ -193,7 +193,7 @@ def contact():
 
 @app.route('/pose')
 def pose():
-    return render_template('pose.html')  # Serve the index.html page
+    return render_template('pose.html')  
 
 @app.route('/video_feed')
 def video_feed():
@@ -203,4 +203,4 @@ def video_feed():
 
 
 if __name__ == "__main__":
-    app.run(port=5084)
+    app.run(port=5092)
